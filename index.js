@@ -1,3 +1,3 @@
 'use strict';
 var wktnrss = require('./lib/wktnrss.js');
-wktnrss.getSound('shoe','en','en');
+wktnrss.getSound('asperge','fr','en');
