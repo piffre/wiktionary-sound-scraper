@@ -21,12 +21,13 @@
     "url": "https://github.com/codtatochip/wiktionary-sound-scraper/issues"
   },
   "homepage": "https://github.com/codtatochip/wiktionary-sound-scraper#readme",
+  "dependencies": {
+    "JSONPath": ">=0.10.0",
+    "download": "^4.2.0"
+  },
   "devDependencies": {
     "chai": "^3.2.0",
-    "mocha": "^2.3.1"
-  },
-  "dependencies": {
-    "JSONPath": "^0.10.0",
-    "download": "^4.2.0"
+    "chai-as-promised": "^5.1.0",
+    "mocha": "^2.3.2"
   }
 }

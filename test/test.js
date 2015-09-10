@@ -1,24 +1,17 @@
 var expect = require('chai').expect;
-var wktnrss = require('../lib/wktnrss');
+var fs = require('fs');
+var wktnrss = require('../');
+var util = require('util');
+var path = require('path');
 
-describe('wiktionary-sound-scraper', function(){
-  describe("getSound", function() {
-    it("Should have a function to get the sound", function() {
-      expect(wktnrss.getSound).to.be.a('function');
-    });
-  })
-});
-
-describe('wiktionary-sound-scraper', function(){
-  describe("getSound", function() {
-    it("Should return a file", function(done) {
-      var sound = wktnrss.getSound('shoe','en','en');
-      expect(sound).to.be.a('SoundFile');
-      expect(sound).to.have.property('name').that.is.not.empty;
-      expect(sound).to.have.property('length').that.is.not.empty;
-      expect(sound).to.have.property('path').that.is.not.empty;
-      expect(sound).to.have.property('type').that.is.not.empty;
+// TODO Mock to avoid using network and file "En-us-shoe.ogg"
+describe("Scraper", function() {
+  it("Should scrap a file", function(done) {
+    this.timeout(10000);
+    wktnrss.scrap('shoe', __dirname, 'en', function(err, data){
+      var fn = function () {fs.readFileSync(path.resolve(__dirname, 'En-us-shoe.ogg'), null);}
+      expect(fn).to.not.throw(err);
       done();
     });
-  })
+  });
 });
