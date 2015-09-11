@@ -2,6 +2,9 @@
 var https = require('https')
 var jsonPath = require('JSONPath')
 var Download = require('download')
+var urlencode = require('urlencode')
+var URL = require('url')
+
 
 function Scraper () {
   // Only this one function is exposed
@@ -17,6 +20,7 @@ function Scraper () {
       return
     }
 
+    word = urlencode(word)
     lang = lang || 'en'
 
     // Search, locate, retrieve
@@ -77,9 +81,8 @@ function Scraper () {
   // Locate: discover the url of the file based on its name
   function locate (file, lang, callback) {
     // Build the query - media files are "images". See https://www.mediawiki.org/wiki/API:Main_page
-    var url = 'https://' + lang + '.wiktionary.org/w/api.php?action=query&prop=imageinfo&iiprop=url&format=json&iwurl=l&rawcontinue=&titles=' + file
-
-    https.get(url, function (res) {
+    var url = 'https://' + lang + '.wiktionary.org/w/api.php?action=query&prop=imageinfo&iiprop=url&format=json&iwurl=l&rawcontinue=&titles=' + urlencode(file)
+      https.get(url, function (res) {
       var data = ''
 
       res.on('data', function (chunk) {
@@ -87,7 +90,7 @@ function Scraper () {
       })
 
       res.on('end', function () {
-        // JSON e.g.: https://en.wiktionary.org/w/api.php?action=query&prop=images&format=json&titles=shoe
+        // JSON e.g.: https://en.wiktionary.org/w/api.php?action=query&prop=imageinfo&iiprop=url&format=json&iwurl=l&rawcontinue=&titles=File:en-us-shoe.ogg
         var fileUrl = jsonPath.eval(JSON.parse(data), 'query.pages[-1].imageinfo..url')
         var err = null
         if (!fileUrl) {
@@ -105,6 +108,9 @@ function Scraper () {
 
   // Retrieve: actually grab and download the audio file
   function retrieve (url, lang, location, name, callback) {
+    // Making sure we have a readable file name
+    if (!name) name = urlencode.decode(URL.parse(url).pathname.split('/').pop())
+
     new Download()
       .get(url)
       .dest(location)
