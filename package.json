@@ -23,7 +23,7 @@
   "homepage": "https://github.com/codtatochip/wiktionary-sound-scraper#readme",
   "dependencies": {
     "JSONPath": ">=0.10.0",
-    "download": "^4.2.0"
+    "download": "^4.2.0",
     "urlencode": ">=1.1.0"
   },
   "devDependencies": {
