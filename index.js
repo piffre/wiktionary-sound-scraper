@@ -7,8 +7,15 @@ function Scraper () {
   // Only this one function is exposed
   Scraper.prototype.scrap = function scrap (word, location, lang, name, callback) {
     // Well, it is better to have something to look for
-    if (!word) throw new Error('Word must be defined')
-    if (!location) throw new Error('Word location be defined')
+    if (!word || !location) {
+      callback(Error('Word and location be defined'))
+      return
+    }
+
+    if (lang === undefined || name === undefined || callback === undefined) {
+      callback(Error('Parameters are necessary, use empty strings'))
+      return
+    }
 
     lang = lang || 'en'
 
@@ -106,6 +113,5 @@ function Scraper () {
   }
 }
 
-// No need to create an instance outside the module
 var scraper = new Scraper()
 module.exports = scraper
