@@ -5,7 +5,6 @@ var Download = require('download')
 var urlencode = require('urlencode')
 var URL = require('url')
 
-
 function Scraper () {
   // Only this one function is exposed
   Scraper.prototype.scrap = function scrap (word, location, lang, name, callback) {
@@ -82,7 +81,7 @@ function Scraper () {
   function locate (file, lang, callback) {
     // Build the query - media files are "images". See https://www.mediawiki.org/wiki/API:Main_page
     var url = 'https://' + lang + '.wiktionary.org/w/api.php?action=query&prop=imageinfo&iiprop=url&format=json&iwurl=l&rawcontinue=&titles=' + urlencode(file)
-      https.get(url, function (res) {
+    https.get(url, function (res) {
       var data = ''
 
       res.on('data', function (chunk) {
