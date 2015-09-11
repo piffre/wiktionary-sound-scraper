@@ -30,7 +30,6 @@ describe("Scraper", function() {
   it("Should fail and a return proper error (file does not exist)", function(done) {
     scraper.scrap('Word that does not exist in Wiktionary', __dirname, 'en', '', function(err, data){
       expect(err).to.be.an('Error');
-      console.log(err);
       done();
     });
   });
