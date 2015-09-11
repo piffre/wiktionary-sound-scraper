@@ -1,6 +1,6 @@
 {
   "name": "wiktionary-sound-scraper",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Node module to scrape sounds from *.wiktionary.org pages.",
   "main": "index.js",
   "scripts": {
