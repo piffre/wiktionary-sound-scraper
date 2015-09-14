@@ -68,7 +68,7 @@ function Scraper () {
         var err = null
         if (!found) {
           fileName = null
-          err = new Error("Can't find a page corresponding to the word")
+          err = new Error('Can\'t find a page corresponding to the word "' + urlencode(word) + '"')
         }
         callback(err, fileName)
       })
@@ -93,7 +93,7 @@ function Scraper () {
         var fileUrl = jsonPath.eval(JSON.parse(data), 'query.pages[-1].imageinfo..url')
         var err = null
         if (!fileUrl) {
-          err = new new Error("Can't locate the file")
+          err = new new Error('Can\'t locate the file "' + file + '"')
           fileUrl = null
         } else {
           fileUrl = fileUrl.toString()
@@ -106,6 +106,7 @@ function Scraper () {
   }
 
   // Retrieve: actually grab and download the audio file
+  // The data in the callback is a vinyl
   function retrieve (url, lang, location, name, callback) {
     // Making sure we have a readable file name
     if (!name) name = urlencode.decode(URL.parse(url).pathname.split('/').pop())
@@ -114,7 +115,13 @@ function Scraper () {
       .get(url)
       .dest(location)
       .rename(name)
-      .run(callback)
+      .run(done)
+
+    function done (err, vinyl) {
+      var scrappedObj = null
+      if (!err) scrappedObj = vinyl[0]
+      callback(err, scrappedObj)
+    }
   }
 }
 
