@@ -1,7 +1,6 @@
 # Wiktionary sound scraper
-[![Build Status](https://travis-ci.org/codtatochip/wiktionary-sound-scraper.svg?branch=master)](https://travis-ci.org/codtatochip/wiktionary-sound-scraper)
-[![Coverage Status](https://coveralls.io/repos/codtatochip/wiktionary-sound-scraper/badge.svg?branch=master&service=github)](https://coveralls.io/github/codtatochip/wiktionary-sound-scraper?branch=master)
-[![Dependencies Status](https://david-dm.org/codtatochip/wiktionary-sound-scraper.svg)](https://david-dm.org/codtatochip/wiktionary-sound-scraper)
+[![Build Status](https://travis-ci.org/piffre/wiktionary-sound-scraper.svg?branch=master)](https://travis-ci.org/codtatochip/wiktionary-sound-scraper)
+[![Dependencies Status](https://david-dm.org/piffre/wiktionary-sound-scraper.svg)](https://david-dm.org/codtatochip/wiktionary-sound-scraper)
 
 A very simple [npm](https://www.npmjs.com) module to download sounds from [wiktionary.org](https://wiktionary.org). Helpful when you have a long list of words and you want to know how they sound.
 
@@ -9,7 +8,7 @@ Disclaimer: the module is basic, it will download the first .ogg or .ogv file fo
 
 ## How to use
 
-### Install the module 
+### Install the module
 ```bash
   $ npm install wiktionary-sound-scraper
 ```
@@ -26,5 +25,4 @@ All the parameters are necessary:
 * callback function
 
 ## Want it to do more? Have comments?
-Please, [pull requests](https://github.com/codtatochip/wiktionary-sound-scraper/pulls) and [issues](https://github.com/codtatochip/wiktionary-sound-scraper/issues/new) are here for that!
-
+Please, [pull requests](https://github.com/piffre/wiktionary-sound-scraper/pulls) and [issues](https://github.com/piffre/wiktionary-sound-scraper/issues/new) are here for that!
