@@ -7,7 +7,7 @@ var path = require('path')
 
 // TODO Mock to avoid using network and file "En-us-shoe.ogg"
 describe('Scraper', function () {
-  this.timeout(5000)
+  this.timeout(15000)
   it('Should fail because of missing language and word parameters', function (done) {
     scraper.scrap(undefined, '', undefined, undefined, function (err, data) {
       expect(err).to.be.an('Error')

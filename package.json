@@ -1,6 +1,6 @@
 {
   "name": "wiktionary-sound-scraper",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A very simple npm module to download sounds from wiktionary.org",
   "main": "index.js",
   "scripts": {
@@ -23,13 +23,13 @@
   "homepage": "https://github.com/piffre/wiktionary-sound-scraper#readme",
   "dependencies": {
     "JSONPath": ">=0.10.0",
+    "async": "^1.4.2",
     "download": "^4.2.0",
+    "lodash": "^3.10.1",
     "urlencode": ">=1.1.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "chai-as-promised": "^5.1.0",
-    "mocha": "^2.3.2",
-    "async": "^1.4.2"
+    "mocha": "^2.3.2"
   }
 }

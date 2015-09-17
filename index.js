@@ -3,10 +3,12 @@ var https = require('https')
 var jsonPath = require('JSONPath')
 var Download = require('download')
 var urlencode = require('urlencode')
+var async = require('async')
 var URL = require('url')
 
 function Scraper () {
   // Only this one function is exposed
+  // TODO : define options
   Scraper.prototype.scrap = function scrap (word, location, lang, name, callback) {
     // Well, it is better to have something to look for
     if (!word || !location) {
@@ -22,16 +24,26 @@ function Scraper () {
     word = urlencode(word)
     lang = lang || 'en'
 
-    // Search, locate, retrieve
-    // Error management at each stage
-    search(word, lang, function (err, fileName) {
-      if (err) { callback(err, null) } else {
+    async.waterfall([
+      function (cbk) {
+        search(word, lang, function (err, fileName) {
+          if (err) return cbk(err, null)
+          else cbk(null, fileName)
+        })
+      },
+      function (fileName, cbk) {
         locate(fileName, lang, function (err, url) {
-          if (err) { callback(err, null) } else {
-            retrieve(url, lang, location, name, callback)
-          }
+          if (err) return cbk(err, null)
+          else cbk(null, url)
+        })
+      },
+      function (url, cbk) {
+        retrieve(url, lang, location, name, function (err, data) {
+          cbk(err, data)
         })
       }
+    ], function (err, data) {
+      callback(err, data)
     })
   }
 
@@ -68,7 +80,7 @@ function Scraper () {
         var err = null
         if (!found) {
           fileName = null
-          err = new Error('Can\'t find a page corresponding to the word "' + urlencode(word) + '"')
+          err = new Error('Can\'t find a page corresponding to the word')
         }
         callback(err, fileName)
       })
@@ -93,7 +105,7 @@ function Scraper () {
         var fileUrl = jsonPath.eval(JSON.parse(data), 'query.pages[-1].imageinfo..url')
         var err = null
         if (!fileUrl) {
-          err = new new Error('Can\'t locate the file "' + file + '"')
+          err = new new Error('Can\'t locate the file')
           fileUrl = null
         } else {
           fileUrl = fileUrl.toString()

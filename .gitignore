@@ -29,3 +29,4 @@ node_modules
 # Sound files downloaded during tests
 *.ogg
 *.ogv
+*.mp3
