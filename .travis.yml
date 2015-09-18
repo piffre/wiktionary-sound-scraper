@@ -1,13 +1,13 @@
 language: node_js
-before_install:
-	- sudo apt-get install ffmpeg
+addons:
+  apt:
+    packages:
+    - ffmpeg
 node_js:
-  - "0.10"
   - "0.12"
   - "stable"
 after_script:
   - npm run coveralls
-# whitelist
 branches:
   only:
     - master
