@@ -8,7 +8,6 @@ var locator = require('./lib/Locator')
 var searcher = require('./lib/Searcher')
 var converter = require('./lib/Converter')
 
-
 function Scraper () {}
 
 // var opts = {location:folder, lang: 'fr', basename: 'new', ext: '.mp3'}
