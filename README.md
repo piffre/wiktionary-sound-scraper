@@ -1,6 +1,7 @@
 # Wiktionary sound scraper
 [![Build Status](https://travis-ci.org/piffre/wiktionary-sound-scraper.svg?branch=master)](https://travis-ci.org/piffre/wiktionary-sound-scraper)
 [![Dependencies Status](https://david-dm.org/piffre/wiktionary-sound-scraper.svg)](https://david-dm.org/piffre/wiktionary-sound-scraper)
+[![Coverage Status](https://coveralls.io/repos/piffre/wiktionary-sound-scraper/badge.svg?branch=master&service=github)](https://coveralls.io/github/piffre/wiktionary-sound-scraper?branch=master)
 
 A very simple [npm](https://www.npmjs.com) module to download sounds from [wiktionary.org](https://wiktionary.org). Helpful when you have a long list of words and you want to know how they sound.
 
