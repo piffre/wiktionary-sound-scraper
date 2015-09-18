@@ -1,10 +1,15 @@
 {
   "name": "wiktionary-sound-scraper",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A very simple npm module to download sounds from wiktionary.org",
-  "main": "index.js",
+  "main": "./index.js",
+  "files": [
+    "index.js",
+    "lib"
+  ],
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "coveralls": "istanbul cover _mocha && istanbul-coveralls"
   },
   "repository": {
     "type": "git",
@@ -26,7 +31,8 @@
     "async": "^1.4.2",
     "download": "^4.2.0",
     "lodash": "^3.10.1",
-    "urlencode": ">=1.1.0"
+    "urlencode": ">=1.1.0",
+    "vinyl": "^0.5.3"
   },
   "devDependencies": {
     "chai": "^3.2.0",
