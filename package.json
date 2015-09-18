@@ -8,7 +8,8 @@
     "lib"
   ],
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
   "devDependencies": {
     "chai": "^3.2.0",
     "coveralls": "^2.11.4",
+    "istanbul": "^0.3.20",
     "mocha": "^2.3.2",
     "mocha-lcov-reporter": "0.0.2"
   }
