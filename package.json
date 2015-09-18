@@ -8,8 +8,7 @@
     "lib"
   ],
   "scripts": {
-    "test": "mocha",
-    "coveralls": "istanbul cover _mocha && istanbul-coveralls"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -36,6 +35,8 @@
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "mocha": "^2.3.2"
+    "coveralls": "^2.11.4",
+    "mocha": "^2.3.2",
+    "mocha-lcov-reporter": "0.0.2"
   }
 }
