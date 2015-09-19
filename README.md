@@ -11,13 +11,23 @@ Disclaimer: the module is basic, it will download the first .ogg or .ogv file fo
 
 ### Install the module
 ```bash
-  $ npm install wiktionary-sound-scraper
+  $ npm install --save wiktionary-sound-scraper
 ```
 ### Play with it
 ```js
 var scraper = require('wiktionary-sound-scraper')
-scraper.scrap('shoe', __dirname, 'en', 'file.ogg', function (err, data){})
+
+var folder = __dirname + '/downloads/'
+var opts = {location: folder, lang: 'fr', basename: 'shoe-sound', ext: '.mp3'}
+
+scraper.scrap('shoe', opts, function (err, vinyl) {
+  if (err) console.log('Didn\'t work: ' + err)
+  else console.log('Here comes the file: ' + vinyl.path)
+})
 ```
+## scrap
+
+
 All the parameters are necessary:
 * word to look for
 * directory to download in

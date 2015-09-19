@@ -57,6 +57,8 @@ Scraper.prototype.scrap = function scrap (word, opts, callback) {
           else finalVinyl = ovinyl
           return cbk(error, finalVinyl)
         })
+      }else{
+        return cbk(error, finalVinyl)
       }
     }
   ], function (err, data) {
