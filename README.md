@@ -11,10 +11,9 @@ Helpful when you have a long list of words and you want to know how they sound.
 ### Install the module
 ```bash
   $ npm install wiktionary-sound-scraper --save
-
 ```
 ### Conversion
-To convert [ffmpeg](https://www.ffmpeg.org/) is necessary.
+[ffmpeg](https://www.ffmpeg.org/) is necessary to convert files.
 Files on wiktionary are in .ogg or .ogv
 ### Play with it
 ```js
