@@ -29,7 +29,8 @@ scraper.scrap('shoe', opts, function (err, vinyl) {
 })
 ```
 ## Examples
-You will find some example in /examples.
+There are some in the `examples` folder, including one how to scrap words from a `.csv` file.
+
 ## Doc
 ### scrap(word, options, callback)
 #### word
