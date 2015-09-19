@@ -75,12 +75,12 @@ describe('Scraper', function () {
   })
 
   it('Should scrap a file, move it to another folder, rename it, and convert it (fr)', function (done) {
-    var folder = __dirname + '/downloads/'
-    var opts = {location: folder, lang: 'fr', basename: 'joujou', ext: '.mp3'}
-    scraper.scrap('jouet', opts, function (err, data) {
-      var fn = function () { fs.readFileSync(path.resolve(folder, 'joujou.mp3'), null) }
-      expect(fn).to.not.throw(err)
-      done()
+      var folder = __dirname + '/downloads/'
+      var opts = {location: folder, lang: 'fr', basename: 'joujou', ext: '.mp3'}
+      scraper.scrap('jouet', opts, function (err, data) {
+        var fn = function () { fs.readFileSync(path.resolve(folder, 'joujou.mp3'), null) }
+        expect(fn).to.not.throw(err)
+        done()
+      })
     })
-  })
 })

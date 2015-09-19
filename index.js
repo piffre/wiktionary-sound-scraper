@@ -48,11 +48,16 @@ Scraper.prototype.scrap = function scrap (word, opts, callback) {
         else cbk(err, vinyl)
       })
     },
-    function (vinyl, cbk) {
-      converter.convert(vinyl.path, ext, function (err, data) {
-        if (err) return cbk(err, null)
-        else cbk(err, data)
-      })
+    function (ivinyl, cbk) {
+      var error = null
+      var finalVinyl = null
+      if (ext) {
+        converter.convert(ivinyl, ext, function (err, ovinyl) {
+          if (err) error = err
+          else finalVinyl = ovinyl
+          return cbk(error, finalVinyl)
+        })
+      }
     }
   ], function (err, data) {
     callback(err, data)

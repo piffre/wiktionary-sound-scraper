@@ -1,5 +1,4 @@
 var scraper = require('../index.js')
-var converter = require('./converter.js')
 var fs = require('fs')
 var async = require('async')
 var _ = require('lodash')
@@ -13,9 +12,20 @@ scraper.scrap(word, __dirname, 'ru', '', function (err, data) {
 })
 */
 
+var scraper = require('../index.js')
+
+var folder = __dirname + '/downloads/'
+var opts = {location: folder, lang: 'fr', basename: 'shoe-sound', ext: '.mp3'}
+
+scraper.scrap('shoe', opts, function (err, vinyl) {
+  if (err) console.log('Didn\'t work: ' + err)
+  else console.log('Here comes the file: ' + vinyl.path)
+})
+
+
 // Scraping and converting from a csv list
 
-scrapCSV(__dirname + '/list-ru-2.csv')
+// scrapCSV(__dirname + '/list-ru-2.csv')
 
 function scrapCSV (file) {
   async.waterfall([
@@ -88,9 +98,11 @@ function scrapConv (words, cbk) {
         if (err) results[key].error = err
         else {
           results[key].vinyl = vin
-          converter.convert(results[key].vinyl.path, '.mp3', function converted (err, opath) {
-            if (!err) results[key].vinyl.path = opath
-          })
+          converter.convert(
+            results[key].vinyl.path, '.mp3',
+            function converted (err, opath) {
+              if (!err) results[key].vinyl.path = opath
+            })
         }
         done()
       })
