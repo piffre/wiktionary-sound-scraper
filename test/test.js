@@ -9,6 +9,7 @@ var scraper = require('../')
 
 // TODO Mock to avoid using network and file "En-us-shoe.ogg"
 // TODO Delete files after tests
+// TODO test all wrong parameters
 
 describe('Scraper', function () {
   this.timeout(50000)

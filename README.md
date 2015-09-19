@@ -2,17 +2,17 @@
 [![Build Status](https://travis-ci.org/piffre/wiktionary-sound-scraper.svg?branch=master)](https://travis-ci.org/piffre/wiktionary-sound-scraper)
 [![Dependencies Status](https://david-dm.org/piffre/wiktionary-sound-scraper.svg)](https://david-dm.org/piffre/wiktionary-sound-scraper)
 [![Coverage Status](https://coveralls.io/repos/piffre/wiktionary-sound-scraper/badge.svg?branch=master&service=github)](https://coveralls.io/github/piffre/wiktionary-sound-scraper?branch=master)
-
-A very simple [npm](https://www.npmjs.com) module to download sounds from [wiktionary.org](https://wiktionary.org). Helpful when you have a long list of words and you want to know how they sound.
-
-Disclaimer: the module is basic, it will download the first .ogg or .ogv file found.
-
+[npm](https://www.npmjs.com) module to download and convert sounds from [wiktionary.org](https://wiktionary.org).
+Helpful when you have a long list of words and you want to know how they sound.
 ## How to use
-
 ### Install the module
 ```bash
-  $ npm install --save wiktionary-sound-scraper
+  $ npm install wiktionary-sound-scraper --save
+
 ```
+### Conversion
+To convert [ffmpeg](https://www.ffmpeg.org/) is necessary.
+Files on wiktionary are in .ogg or .ogv
 ### Play with it
 ```js
 var scraper = require('wiktionary-sound-scraper')
@@ -25,15 +25,43 @@ scraper.scrap('shoe', opts, function (err, vinyl) {
   else console.log('Here comes the file: ' + vinyl.path)
 })
 ```
-## scrap
-
-
-All the parameters are necessary:
-* word to look for
-* directory to download in
-* language of the wiktionary (e.g.: 'es', 'de', 'it'...)
-* name of the file as you want it to be renamed once download (pass '' to avoid renaming)
-* callback function
-
-## Want it to do more? Have comments?
-Please, [pull requests](https://github.com/piffre/wiktionary-sound-scraper/pulls) and [issues](https://github.com/piffre/wiktionary-sound-scraper/issues/new) are here for that!
+## Examples
+You will find some example in /examples.
+## Doc
+### scrap(word, options, callback)
+#### word
+Type: `String`
+Mandatory
+Word to look for.
+#### options
+Type: `Object`
+Mandatory but can be an empty object (ie.:`{}`)
+#### options.folder
+Type: `Object`
+Optional
+Default: `\__dirname`
+Folder to download the file to, will be created if necessary.
+#### options.lang
+Type: `String`
+Optional
+Default: 'en'
+The wiktionary to search in (eg.: 'de' for de.wiktionary.org).
+#### options.basename
+Type: `String`
+Optional
+Default: `null`
+Name of the final file, without extension.
+#### options.ext
+Type: `String`
+Optional
+Default: null
+Extension, like '.mp3'.
+#### callback
+Type: `Function`
+Mandatory
+Function called once the operation has been performed.
+Takes two arguments:
+`err`: if an error occured
+`vinyl`: [vinyl](https://github.com/wearefractal/vinyl) file built at the end
+## Feedbacks, please!
+[Pull requests](https://github.com/piffre/wiktionary-sound-scraper/pulls) and [issues](https://github.com/piffre/wiktionary-sound-scraper/issues/new) are here for that!

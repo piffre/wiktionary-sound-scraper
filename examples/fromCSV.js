@@ -3,29 +3,12 @@ var fs = require('fs')
 var async = require('async')
 var _ = require('lodash')
 
-// Scraping one word
-/*
-var word = 'слон'
-scraper.scrap(word, __dirname, 'ru', '', function (err, data) {
-  console.log('Done')
-  if (err) console.log(err)
-})
-*/
-
-var scraper = require('../index.js')
-
-var folder = __dirname + '/downloads/'
-var opts = {location: folder, lang: 'fr', basename: 'shoe-sound', ext: '.mp3'}
-
-scraper.scrap('shoe', opts, function (err, vinyl) {
-  if (err) console.log('Didn\'t work: ' + err)
-  else console.log('Here comes the file: ' + vinyl.path)
-})
-
-
 // Scraping and converting from a csv list
 
-// scrapCSV(__dirname + '/list-ru-2.csv')
+scrapCSV(__dirname + '/csv/list-short-ru.csv')
+
+var folder = __dirname + '/downloads/'
+var opts = {location: folder, lang: 'ru', ext: '.mp3'}
 
 function scrapCSV (file) {
   async.waterfall([
@@ -40,7 +23,7 @@ function scrapCSV (file) {
       })
     },
     function (words, callback) {
-      scrapConv(words, function (err, files) {
+      scrapMany(words, opts, function (err, files) {
         callback(err, files)
       })
     }
@@ -49,18 +32,19 @@ function scrapCSV (file) {
   })
 }
 
-function displayResults (results) {
+function displayResults (files) {
   var failure = 0
   var success = 0
-  results.forEach(function clean (element, index, array) {
-    var status = element.error ? 'failure' : 'success'
+  files.forEach(function clean (element, index, array) {
     if (element.error) failure++
     else success++
-    console.log(element.word + ': ' + status)
   })
-  console.log('total: ' + results.length)
-  console.log('success: ' + success)
-  console.log('failure: ' + failure)
+  var rate = success / files.length * 100
+  rate = Math.round(rate)
+  console.log('--')
+  console.log('total: ' + files.length)
+  console.log('success: ' + success + ' (' + rate + '%)')
+  console.log('failure: ' + failure + ' (' + (100 - rate) + '%)')
 }
 
 function parse (str, cbk) {
@@ -80,30 +64,31 @@ function parse (str, cbk) {
     var reg = new RegExp(element.old, 'g')
     words = words.replace(reg, element.new)
   })
-  words = _.unique(words.split(','))
+  words = words.split(new RegExp('[,/]', 'g'))
+  words = _.unique(words)
   words.forEach(function clean (element, index, array) {
     words[index] = element.trim()
   })
   cbk(null, words)
 }
 
-function scrapConv (words, cbk) {
+function scrapMany (words, opts, cbk) {
   var results = []
   // We use forEachOf to keep the context
   async.forEachOf(
     words
     , function (value, key, done) {
-      scraper.scrap(value, __dirname, 'ru', '', function scraped (err, vin) {
+      scraper.scrap(value, opts, function scraped (err, vin) {
         results[key] = {word: value, vinyl: null, error: null}
-        if (err) results[key].error = err
-        else {
+        var msg = value
+        if (err) {
+          results[key].error = err
+          msg += ' [failure]'
+        } else {
           results[key].vinyl = vin
-          converter.convert(
-            results[key].vinyl.path, '.mp3',
-            function converted (err, opath) {
-              if (!err) results[key].vinyl.path = opath
-            })
+          msg += ' [success]'
         }
+        console.log(msg)
         done()
       })
     }
