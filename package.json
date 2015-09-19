@@ -1,5 +1,5 @@
 {
-  "name": "Wiktionary-sound-scraper",
+  "name": "wiktionary-sound-scraper",
   "version": "1.0.3",
   "description": "Downloads and converts sounds from wiktionary.org",
   "main": "./index.js",
