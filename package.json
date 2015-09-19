@@ -1,6 +1,6 @@
 {
   "name": "wiktionary-sound-scraper",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A very simple npm module to download sounds from wiktionary.org",
   "main": "./index.js",
   "files": [
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codtatochip/wiktionary-sound-scraper.git"
+    "url": "git+https://github.com/piffre/wiktionary-sound-scraper.git"
   },
   "keywords": [
     "wiktionary",
