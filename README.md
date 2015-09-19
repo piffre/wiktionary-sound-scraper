@@ -44,7 +44,7 @@ You will find some example in /examples.
 #### options.folder
 * Type: `Object`
 * Optional
-* Default: `\__dirname`
+* Default: `__dirname`
 * Folder to download the file to, will be created if necessary.
 
 #### options.lang
