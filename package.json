@@ -1,6 +1,6 @@
 {
   "name": "wiktionary-sound-scraper",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Downloads and converts sounds from wiktionary.org",
   "main": "./index.js",
   "files": [

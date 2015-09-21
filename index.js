@@ -15,7 +15,7 @@ function Scraper () {}
 Scraper.prototype.scrap = function scrap (word, opts, callback) {
   // Args check
   if (arguments.length !== 3) {
-    return callback(new Error('Wrong number of arguments'), null)
+    return new Error('Wrong number of arguments')
   }
   if (typeof (word) !== 'string' ||
       typeof (opts) !== 'object' ||

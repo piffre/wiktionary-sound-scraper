@@ -141,6 +141,12 @@ describe('Scraper', function () {
     })
   })
 
+  it('Should handle a wrong number of parameters', function (done) {
+    var err = scraper.scrap('e')
+    expect(err).to.be.an('Error')
+    done()
+  })
+
   it('Should scrap a file (ru)', function (done) {
     var opts = {lang: 'ru'}
     scraper.scrap('слон', opts, function (err, data) {

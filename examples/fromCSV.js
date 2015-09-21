@@ -5,10 +5,10 @@ var _ = require('lodash')
 
 // Scraping and converting from a csv list
 
-scrapCSV(__dirname + '/csv/list-short-ru.csv')
+scrapCSV(__dirname + '/csv/vocabulaire-montagne-ru.csv')
 
-var folder = __dirname + '/downloads/'
-var opts = {location: folder, lang: 'ru', ext: '.mp3'}
+var folder = __dirname + '/downloads/montagne/'
+var opts = {location: folder, lang: 'en', ext: '.mp3'}
 
 function scrapCSV (file) {
   async.waterfall([
@@ -78,6 +78,7 @@ function scrapMany (words, opts, cbk) {
   async.forEachOf(
     words
     , function (value, key, done) {
+      opts.basename = value
       scraper.scrap(value, opts, function scraped (err, vin) {
         results[key] = {word: value, vinyl: null, error: null}
         var msg = value
