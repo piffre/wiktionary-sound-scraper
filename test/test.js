@@ -34,7 +34,14 @@ describe('Scraper', function () {
                     '&titles='
   var searchFile = __dirname + '/samples/shoe-search-reply.json'
   var locateFile = __dirname + '/samples/shoe-locate-reply.json'
-
+  it('Should handle error due to wrong format', function (done) {
+    var opts = {ext: '#*)°mp3'}
+    scraper.scrap('jouet', opts, function (err, data) {
+      expect(err).not.to.be.null
+      expect(err).not.to.be.null
+      done()
+    })
+  })
   it('Should scrap, move, rename, and convert (fr)', function (done) {
     var folder = __dirname + '/downloads/'
     var opts = {location: folder, lang: 'fr', basename: 'joujou', ext: '.mp3'}
@@ -48,7 +55,6 @@ describe('Scraper', function () {
       done()
     })
   })
-
   it('Should handle a wrong answer when searching', function (done) {
     nock('https://en.wiktionary.org')
       .get(searchPath + 'shoe')
@@ -74,10 +80,6 @@ describe('Scraper', function () {
       done()
     })
   })
-
-
-
-
   it('Should handle an error when searching', function (done) {
     nock('https://en.wiktionary.org')
       .get(searchPath + 'shoe')
@@ -140,13 +142,11 @@ describe('Scraper', function () {
       done()
     })
   })
-
   it('Should handle a wrong number of parameters', function (done) {
     var err = scraper.scrap('e')
     expect(err).to.be.an('Error')
     done()
   })
-
   it('Should scrap a file (ru)', function (done) {
     var opts = {lang: 'ru'}
     scraper.scrap('слон', opts, function (err, data) {
@@ -156,7 +156,6 @@ describe('Scraper', function () {
       done()
     })
   })
-
   it('Should return a proper error (word does not exist)', function (done) {
     scraper.scrap('èèèe@@@%*', {}, function (err, data) {
       expect(err).to.be.an('Error')
@@ -164,5 +163,4 @@ describe('Scraper', function () {
       done()
     })
   })
-
 })
