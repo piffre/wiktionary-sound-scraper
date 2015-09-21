@@ -1,0 +1,18 @@
+{
+  "query":{
+    "pages":{
+      "-1":{
+        "ns":6,
+        "title":"File:en-us-shoe.ogg",
+        "missing":"",
+        "imagerepository":"shared",
+        "imageinfo":[
+          {
+            "url":"https://upload.wikimedia.org/wikipedia/commons/4/44/En-us-shoe.ogg",
+            "descriptionurl":"https://commons.wikimedia.org/wiki/File:En-us-shoe.ogg"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "batchcomplete":"",
+  "query":{
+    "pages":{
+      "7202":{
+        "pageid":7202,
+        "ns":0,
+        "title":"shoe",
+        "images":[
+          {
+            "ns":6,
+            "title":"File:Bristol.zoo.crocshoes.arp.jpg"
+          },
+          {
+            "ns":6,
+            "title":"File:Wikipedia-logo.png"
+          },
+          {
+            "ns":6,
+            "title":"File:en-us-shoe.ogg"
+          }
+        ]
+      }
+    }
+  }
+}

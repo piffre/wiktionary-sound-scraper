@@ -50,19 +50,22 @@ Scraper.prototype.scrap = function scrap (word, opts, callback) {
     },
     function (ivinyl, cbk) {
       var error = null
-      var finalVinyl = null
+      var finalVinyl = ivinyl
       if (ext) {
         converter.convert(ivinyl, ext, function (err, ovinyl) {
           if (err) error = err
           else finalVinyl = ovinyl
-          return cbk(error, finalVinyl)
+          cbk(error, finalVinyl)
+          return
         })
-      }else{
-        return cbk(error, finalVinyl)
+      } else {
+         cbk(error, finalVinyl)
+         return
       }
     }
   ], function (err, data) {
     callback(err, data)
+    return
   })
 }
 
