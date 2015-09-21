@@ -35,6 +35,20 @@ describe('Scraper', function () {
   var searchFile = __dirname + '/samples/shoe-search-reply.json'
   var locateFile = __dirname + '/samples/shoe-locate-reply.json'
 
+  it('Should scrap, move, rename, and convert (fr)', function (done) {
+    var folder = __dirname + '/downloads/'
+    var opts = {location: folder, lang: 'fr', basename: 'joujou', ext: '.mp3'}
+    scraper.scrap('jouet', opts, function (err, data) {
+      var fileName = opts.basename + opts.ext
+      var fn = function () {
+        fs.readFileSync(path.resolve(opts.location, fileName), null)
+      }
+      expect(err).to.be.null
+      expect(fn).to.not.throw()
+      done()
+    })
+  })
+
   it('Should handle a wrong answer when searching', function (done) {
     nock('https://en.wiktionary.org')
       .get(searchPath + 'shoe')
@@ -60,6 +74,9 @@ describe('Scraper', function () {
       done()
     })
   })
+
+
+
 
   it('Should handle an error when searching', function (done) {
     nock('https://en.wiktionary.org')
@@ -141,19 +158,5 @@ describe('Scraper', function () {
       done()
     })
   })
-
-  it('Should scrap, move, rename, and convert (fr)', function (done) {
-      var folder = __dirname + '/downloads/'
-      var opts = {location: folder, lang: 'fr', basename: 'joujou', ext: '.mp3'}
-      scraper.scrap('jouet', opts, function (err, data) {
-        var fileName = opts.basename + opts.ext
-        var fn = function () {
-          fs.readFileSync(path.resolve(opts.location, fileName), null)
-        }
-        expect(err).to.be.null
-        expect(fn).to.not.throw()
-        done()
-      })
-    })
 
 })
