@@ -30,3 +30,6 @@ node_modules
 *.ogg
 *.ogv
 *.mp3
+
+# Private folder
+examples/private
