@@ -1,6 +1,6 @@
 {
   "name": "wiktionary-sound-scraper",
-  "version": "1.0.5",
+  "version": "1.0.4",
   "description": "Downloads and converts sounds from wiktionary.org",
   "main": "./index.js",
   "files": [
@@ -35,15 +35,21 @@
     "download": "^4.2.0",
     "lodash": ">3.10.1",
     "urlencode": ">=1.1.0",
-    "vinyl": ">=1.0.0"
+    "vinyl": "^0.5.3"
   },
   "devDependencies": {
     "chai": ">3.2.0",
     "coveralls": "^2.11.4",
     "istanbul": "^0.3.20",
+<<<<<<< HEAD
     "mocha": ">2.3.2",
     "mocha-lcov-reporter": ">=1.0.0",
     "nock": ">2.12.0",
+=======
+    "mocha": "^2.3.2",
+    "mocha-lcov-reporter": "0.0.2",
+    "nock": "^2.12.0",
+>>>>>>> parent of 2040ccc... Updated dependencies
     "sinon": "^1.16.1"
   }
 }
