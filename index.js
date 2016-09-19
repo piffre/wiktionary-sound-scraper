@@ -22,7 +22,7 @@ Scraper.prototype.scrap = function scrap (word, opts, callback) {
       typeof (callback) !== 'function') {
     return callback(new Error('Wrong argument type'), null)
   }
-
+  
   word = urlencode(word)
   var location = opts.location ? opts.location : __dirname
   var lang = opts.lang ? opts.lang : 'en'
