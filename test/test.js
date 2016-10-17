@@ -11,15 +11,13 @@ var scraper = require('../')
 
 // TODO Delete files after tests
 // TODO test wrong parameters
+// TODO DRY!
 
 describe('Scraper', function () {
-
-  // this.timeout(50000)
   beforeEach(function () {
-      nock.cleanAll()
-      nock.disableNetConnect()
-    })
-    // this.timeout(50000)
+    nock.cleanAll()
+    nock.disableNetConnect()
+  })
   afterEach(function () {
     nock.cleanAll()
     nock.enableNetConnect()
@@ -65,12 +63,11 @@ describe('Scraper', function () {
     })
   })
 
-  it('Should scrap, move, rename, and convert', function (done) {
+  it('Should scrap, move, and convert', function (done) {
     var folder = __dirname + '/downloads/'
     var opts = {
       location: folder,
       lang: 'fr',
-      basename: 'joujou',
       ext: '.mp3'
     }
     var word = 'shoe'
@@ -83,13 +80,14 @@ describe('Scraper', function () {
     nock(fileURL)
       .get('/wikipedia/commons/4/44/En-us-shoe.ogg')
       .replyWithFile(200, file)
+    var ext = path.extname('En-us-shoe.ogg')
+    var basename = path.basename('En-us-shoe.ogg', ext)
     scraper.scrap(word, opts, function (err, data) {
-      var fileName = opts.basename + opts.ext
       var fn = function () {
-        fs.readFileSync(path.resolve(opts.location, fileName), null)
+        fs.readFileSync(path.resolve(opts.location, basename + opts.ext), null)
       }
-      expect(err).to.be.null
       expect(fn).to.not.throw()
+      expect(err).to.be.null
       done()
     })
   })
@@ -174,34 +172,11 @@ describe('Scraper', function () {
       done()
     })
   })
+
   it('Should handle a wrong number of parameters', function (done) {
     var err = scraper.scrap('e')
     expect(err).to.be.an('Error')
     done()
-  })
-
-  it('Should scrap from a word in another alphabet', function (done) {
-    var word = 'слон'
-    var lang = 'ru'
-    nock('https://ru.wiktionary.org')
-      .get(searchPath + urlencode.encode(word))
-      .replyWithFile(200, searchFile)
-    nock('https://ru.wiktionary.org')
-      .get(locatePath + urlencode.encode('File:en-us-shoe.ogg'))
-      .replyWithFile(200, locateFile)
-    nock(fileURL)
-      .get('/wikipedia/commons/4/44/En-us-shoe.ogg')
-      .replyWithFile(200, file)
-    scraper.scrap(word, {
-      lang: lang
-    }, function (err, data) {
-      var fn = function () {
-        fs.readFileSync(data.path, null)
-      }
-      expect(err).to.be.null
-      expect(fn).to.not.throw()
-      done()
-    })
   })
 
   it('Should return a proper error (word does not exist)', function (done) {

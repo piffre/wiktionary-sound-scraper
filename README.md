@@ -20,7 +20,7 @@ Files on wiktionary are in .ogg or .ogv
 var scraper = require('wiktionary-sound-scraper')
 
 var folder = __dirname + '/downloads/'
-var opts = {location: folder, lang: 'fr', basename: 'shoe-sound', ext: '.mp3'}
+var opts = {location: folder, lang: 'fr', ext: '.mp3'}
 
 scraper.scrap('shoe', opts, function (err, vinyl) {
   if (err) console.log('Didn\'t work: ' + err)
@@ -52,12 +52,6 @@ There are some in the `examples` folder, including one how to scrap words from a
 * Optional
 * Default: `'en'`
 * The wiktionary to search in (eg.: `'de'` for de.wiktionary.org).
-
-#### options.basename
-* Type: `String`
-* Optional
-* Default: `null`
-* Name of the final file, without extension.
 
 #### options.ext
 * Type: `String`
