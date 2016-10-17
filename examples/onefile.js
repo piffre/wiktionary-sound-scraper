@@ -1,12 +1,13 @@
 var scraper = require('../index.js')
 
-// Scraping one word
+// Scrap one word
 var word = 'слон'
-console.log(scraper)
-
-scraper.scrap(word, __dirname, 'ru', '', function (err, data) {
-
-    console.log('Done')
-
-    if (err) console.log(err)
+var opts = {
+  location: __dirname,
+  lang: 'ru',
+  ext: '.mp3'
+}
+scraper.scrap(word, opts, function (err, data) {
+  console.log('Done')
+  if (err) console.log(err)
 })

@@ -5,12 +5,16 @@ var _ = require('lodash')
 
 // Scraping and converting from a csv list
 
-scrapCSV(__dirname + '/csv/vocabulaire-montagne-ru.csv')
+scrapCSV(__dirname + '/csv/list')
 
-var folder = __dirname + '/downloads/montagne/'
-var opts = {location: folder, lang: 'en', ext: '.mp3'}
+var folder = __dirname + '/downloads/'
+var opts = {
+  location: folder,
+  lang: 'en',
+  ext: '.mp3'
+}
 
-function scrapCSV (file) {
+function scrapCSV(file) {
   async.waterfall([
     function (callback) {
       fs.readFile(file, function (err, string) {
@@ -32,12 +36,12 @@ function scrapCSV (file) {
   })
 }
 
-function displayResults (files) {
+function displayResults(files) {
   var failure = 0
   var success = 0
-  files.forEach(function clean (element, index, array) {
+  files.forEach(function clean(element, index, array) {
     if (element.error) failure++
-    else success++
+      else success++
   })
   var rate = success / files.length * 100
   rate = Math.round(rate)
@@ -47,40 +51,67 @@ function displayResults (files) {
   console.log('failure: ' + failure + ' (' + (100 - rate) + '%)')
 }
 
-function parse (str, cbk) {
+function parse(str, cbk) {
   var words = str.toString().toLowerCase()
-  // Accents for pronounciation
+    // Accents for pronounciation
   var replacement = [
-    {old: 'а́', new: 'а'},
-    {old: 'е́', new: 'е'},
-    {old: 'о́', new: 'о'},
-    {old: 'у́', new: 'у'},
-    {old: 'я́', new: 'я'},
-    {old: 'и́', new: 'и'},
-    {old: 'ю́', new: 'ю'},
-    {old: 'ы́', new: 'ы'}
+    {
+      old: 'а́',
+      new: 'а'
+    },
+    {
+      old: 'е́',
+      new: 'е'
+    },
+    {
+      old: 'о́',
+      new: 'о'
+    },
+    {
+      old: 'у́',
+      new: 'у'
+    },
+    {
+      old: 'я́',
+      new: 'я'
+    },
+    {
+      old: 'и́',
+      new: 'и'
+    },
+    {
+      old: 'ю́',
+      new: 'ю'
+    },
+    {
+      old: 'ы́',
+      new: 'ы'
+    }
   ]
-  replacement.forEach(function clean (element, index, array) {
+  replacement.forEach(function clean(element, index, array) {
     var reg = new RegExp(element.old, 'g')
     words = words.replace(reg, element.new)
   })
-  words = words.split(new RegExp('[,/]', 'g'))
-  words = _.unique(words)
-  words.forEach(function clean (element, index, array) {
+  words = words.split(new RegExp('[;/]', 'g'))
+  words = _.uniq(words)
+  words.forEach(function clean(element, index, array) {
     words[index] = element.trim()
   })
   cbk(null, words)
 }
 
-function scrapMany (words, opts, cbk) {
+function scrapMany(words, opts, cbk) {
   var results = []
-  // We use forEachOf to keep the context
+    // We use forEachOf to keep the context
   async.forEachOf(
-    words
-    , function (value, key, done) {
-      opts.basename = value
-      scraper.scrap(value, opts, function scraped (err, vin) {
-        results[key] = {word: value, vinyl: null, error: null}
+    words,
+    function (value, key, done) {
+      scraper.scrap(value, opts, function scraped(err, vin) {
+        results[key] = {
+          word: value,
+          vinyl: null,
+          error: null
+        }
         var msg = value
         if (err) {
           results[key].error = err
@@ -92,8 +123,8 @@ function scrapMany (words, opts, cbk) {
         console.log(msg)
         done()
       })
-    }
-    , function browsed () {
+    },
+    function browsed() {
       cbk(null, results)
     }
   )
