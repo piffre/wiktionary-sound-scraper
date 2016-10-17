@@ -5,7 +5,6 @@ addons:
     - ffmpeg
     - libavcodec-extra-53
 node_js:
-  - "0.12"
   - "stable"
 after_script:
   - npm run coveralls
