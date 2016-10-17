@@ -64,7 +64,7 @@ describe('Scraper', function () {
   })
 
   it('Should scrap, move, and convert', function (done) {
-    this.timeout(3000)
+    this.timeout(5000)
     var folder = __dirname + '/downloads/'
     var opts = {
       location: folder,
