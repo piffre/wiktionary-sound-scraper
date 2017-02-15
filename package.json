@@ -40,6 +40,10 @@
   "devDependencies": {
     "chai": "3.5.0",
     "coveralls": "2.11.4",
+    "eslint": "^3.15.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.1",
+    "eslint-plugin-standard": "^2.0.1",
     "istanbul": "0.4.5",
     "mocha": "3.0.2",
     "mocha-lcov-reporter": "1.2.0",

@@ -8,12 +8,12 @@ var locator = require('./lib/Locator')
 var searcher = require('./lib/Searcher')
 var converter = require('./lib/Converter')
 
-function Scraper() {}
+function Scraper () {}
 
 // var opts = {location:folder, lang: 'fr', ext: '.mp3'}
 // The scraper 1. searches for the word, 2. locates file, 3. downloads it, 4. converts it
 // TODO: allow 'word' to be an array
-Scraper.prototype.scrap = function scrap(word, opts, callback) {
+Scraper.prototype.scrap = function scrap (word, opts, callback) {
   // Args check
   if (arguments.length !== 3) {
     return new Error('Wrong number of arguments')
